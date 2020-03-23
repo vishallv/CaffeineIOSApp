@@ -16,9 +16,19 @@ class CaffeineStreamCell : UICollectionViewCell,UICollectionViewDelegate,UIColle
     
     //MARK: Properties
     
+    var streamImages : [UIImage]?
+    var streamText: [String]?
+    var sessionString : String? {
+        didSet{
+            guard let sessionString = sessionString else {return}
+            
+            sessionLabel.text = sessionString
+        }
+    }
+    
     private var collectionView : UICollectionView!
     
-    private let sessionLabel : UILabel = {
+    private lazy var sessionLabel : UILabel = {
         let label = UILabel().createLabel(textValue: "Featured", textSize: 30, font: .heavy)
         label.textColor = .black
         return label
@@ -75,8 +85,25 @@ class CaffeineStreamCell : UICollectionViewCell,UICollectionViewDelegate,UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: gamerVideoCellIdentifier, for: indexPath)
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: gamerVideoCellIdentifier, for: indexPath) as! GamerVideoCell
+        
+        setImagesAndTextForCell(cell,indexPath)
+        
         return cell
+    }
+    
+    
+    func setImagesAndTextForCell(_ cell: GamerVideoCell,_ indePath : IndexPath){
+
+        guard let streamImages = streamImages, let streamText = streamText else {
+            print("nil values")
+            return}
+        
+        cell.gameViewImage = streamImages[indePath.row]
+        cell.gameInfoString = streamText[indePath.row]
+
+        
     }
     
 }

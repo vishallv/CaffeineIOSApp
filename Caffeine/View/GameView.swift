@@ -12,6 +12,22 @@ class GameView : UIView{
     
     
     //MARK: Properties
+    
+    var imageBackGround : UIImage? {
+        didSet{
+            guard let imageBackGround = imageBackGround else{return}
+            gameView.image = imageBackGround
+            
+        }
+    }
+    
+    var streamInfoText : String?{
+        didSet{
+            guard let streamInfoText = streamInfoText else {return}
+            streamInfo.text = streamInfoText
+        }
+    }
+    
     private let gameView : UIImageView = {
         
         let iv = UIImageView()

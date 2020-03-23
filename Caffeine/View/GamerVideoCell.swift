@@ -11,9 +11,30 @@ import UIKit
 class GamerVideoCell : UICollectionViewCell{
     
     //MARK: Properties
+    
+    var gameViewImage : UIImage?{
+        
+        didSet{
+            guard let gameViewImage = gameViewImage else {return}
+            gameView.imageBackGround = gameViewImage
+        }
+    }
+    
+    var gameInfoString : String?{
+        
+        didSet{
+            guard let gameInfoString = gameInfoString else {return}
+            gameView.streamInfoText = gameInfoString
+        }
+    }
+    
+    
     private let gameView : GameView = {
         
-        return GameView()
+        let gameView = GameView()
+//        gameView.imageBackGround = #imageLiteral(resourceName: "fortnite")
+        
+        return gameView
     }()
     
     //MARK: Life Cycles

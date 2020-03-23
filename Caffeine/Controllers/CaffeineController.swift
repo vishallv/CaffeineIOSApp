@@ -19,6 +19,12 @@ class CaffeineController : UICollectionViewController ,UICollectionViewDelegateF
     
     //MARK: Properties
     
+    private var sessionString : [String] = ["Featured","For You"]
+
+    private var gamerPlayImages : [[UIImage]] = [[#imageLiteral(resourceName: "stream8"),#imageLiteral(resourceName: "stream1"),#imageLiteral(resourceName: "stream5"),#imageLiteral(resourceName: "stream3")],[#imageLiteral(resourceName: "steam7"),#imageLiteral(resourceName: "stream2"),#imageLiteral(resourceName: "stream6"),#imageLiteral(resourceName: "stream4")]]
+    private var gameSessionInfo : [[String]] = [["Caffeine x Drake","Gaming All Day","Fortnite championshop day","Custom Game room Build"],["Lets kick of the new COD","Watch the LEAGUE","Best SQUAD with League","Its DR.Lupo"]]
+    
+    private var index = 0
 
     
     //MARK: Life Cycles
@@ -56,6 +62,13 @@ class CaffeineController : UICollectionViewController ,UICollectionViewDelegateF
         if kind == UICollectionView.elementKindSectionHeader{
 
             let cell = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: caffieneCellIdentifier, for: indexPath) as! CaffeineStreamCell
+
+            
+            if indexPath.section > 1{
+            cell.sessionString = sessionString[indexPath.section-2]
+            cell.streamImages = gamerPlayImages[indexPath.section-2]
+            cell.streamText = gameSessionInfo[indexPath.section-2]
+            }
             return cell
         }
         
@@ -69,6 +82,7 @@ class CaffeineController : UICollectionViewController ,UICollectionViewDelegateF
         return UICollectionReusableView()
 //        return fatalError()
     }
+    
     
     //MARK: UICollectionView HEADER
     
@@ -129,7 +143,7 @@ class CaffeineController : UICollectionViewController ,UICollectionViewDelegateF
 //    MARK: UICollectionViewDataSource
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+        return 4
 
     }
 
